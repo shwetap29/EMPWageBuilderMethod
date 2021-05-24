@@ -1,2 +1,0 @@
-com/EmpWage/EmpWageMethod.java
- com.EmpWage.EmpWageMethod
