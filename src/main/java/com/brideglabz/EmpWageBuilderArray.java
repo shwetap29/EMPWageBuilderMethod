@@ -6,4 +6,9 @@ public class EmpWageBuilderArray {
 
     public void computeEmpWage() {
     }
+
+    @Override
+    public int getTotalWage(String company) {
+        return 0;
+    }
 }
