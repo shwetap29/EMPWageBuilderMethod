@@ -1,46 +1,30 @@
 package com.brideglabz;
 
 public class EmpWage {
-    public static final int IS_FULL_TIME=1;
-    public static final int IS_PART_TIME=2;
+    public final  String company;
+    public int empRatePerHour;
+    public final int numOfWorkingDays;
+    public final int maxHoursPerMonth;
+    public int totalEmpWage;
 
-    public static int calculateEmpWageForCompanies(String company, int wagePerHr, int maxWorkingHr, int maxWorkingDays) {
+    public EmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
+        this.company = company;
+        this.empRatePerHour = empRatePerHour;
+        this.numOfWorkingDays = numOfWorkingDays;
+        this.maxHoursPerMonth = maxHoursPerMonth;
+    }
 
-        int totalWage=0;
-        int totalWorkingDays=0;
-        int totalHr=0;
-
-        System.out.println("Wellcome to the Employee Wage computation program.");
-
-        while (totalWorkingDays<maxWorkingDays && totalHr<maxWorkingHr) {
-            int empHr=0;
-            totalWorkingDays++;
-
-            int checkEmp = (int) (Math.random()*3);
-
-            switch (checkEmp) {
-                case IS_FULL_TIME :
-                    empHr=8;
-                    break;
-                case IS_PART_TIME :
-                    empHr=4;
-                    break;
-                default :
-                    empHr=0;
-            }
-            totalHr += empHr;
-
-            int dailyWage=empHr*wagePerHr;
-            System.out.println("Daily Wage ="+dailyWage);
-
-        }
-        totalWage=totalHr*wagePerHr;
-        System.out.println("Total Employee Wage for company:"+company+" is "+totalWage);
-        return totalWage;
+    public void setTotalEmpWage(int totalEmpWage) {
+        this.totalEmpWage = totalEmpWage;
+    }
+    @Override
+    public String toString() {
+        return "Total Emp Wage for company: "+company+" is: "+totalEmpWage;
     }
     public static void main(String[] args) {
-        calculateEmpWageForCompanies("Demart",100,208,26 );
-        calculateEmpWageForCompanies("Reliance", 120, 208, 2);
-        calculateEmpWageForCompanies("Accenture",150,200,25);
+        EmpWageBuilderArray empWageBuilder = new EmpWageBuilderArray();
+        empWageBuilder.addCompanyEmpWage("Dmart", 20, 2, 10);
+        empWageBuilder.addCompanyEmpWage("Reliance", 10, 5, 20);
+        empWageBuilder.computeEmpWage();
     }
 }
