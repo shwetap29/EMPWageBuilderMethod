@@ -1,27 +1,34 @@
 package com.brideglabz;
 
-<<<<<<< HEAD
-public class EmpWageBuilderArray implements IComputeEmpWage {
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public abstract class EmpWageBuilder implements IComputeEmpWage {
+    //constant
     public static final int IS_FULL_TIME=1;
     public static final int IS_PART_TIME=2;
-    private int numOfCompany = 0;
-    private EmpWage[] companyEmpWageArray;
+    // variables
+    private List<EmpWage> companyEmpWageList;
+    private Map<String, EmpWage> companyToEmpWageMap;
 
-    public EmpWageBuilderArray() {
-        companyEmpWageArray = new EmpWage[5];
+    public EmpWageBuilder(){
+        companyEmpWageList = new LinkedList<>();
+        companyToEmpWageMap = new HashMap<>();
     }
-
     public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth) {
-        companyEmpWageArray[numOfCompany] = new EmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
-        numOfCompany++;
+        EmpWage companyEmpWage = new EmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+        companyEmpWageList.add(companyEmpWage);
+        companyToEmpWageMap.put(company, companyEmpWage);
     }
-
-    public void computeEmpWage() {
-        for (int i =0; i < numOfCompany; i++) {
-            companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-            System.out.println(companyEmpWageArray[i]);
+    public void computeWmpWage(){
+        for (int i =0; i < companyEmpWageList.size(); i++) {
+            EmpWage companyEmpWage = companyEmpWageList.get(i);
+            companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+            System.out.println(companyEmpWage);
         }
-    }
+        }
     private int computeEmpWage(EmpWage companyEmpWage) {
         //Variables
         int empHrs = 0; int totalEmpHrs = 0; int totalWorkingDays = 0;
@@ -44,14 +51,11 @@ public class EmpWageBuilderArray implements IComputeEmpWage {
         }
         return totalEmpHrs * companyEmpWage.empRatePerHour;
     }
-
     @Override
     public int getTotalWage(String company) {
-      return  0;
+        return companyToEmpWageMap.get(company).totalEmpWage;
     }
-}
-=======
-public class EmpWageBuilderArray {
+            }
 
-}
->>>>>>> UC_12_EmpWageArrayList
+
+
