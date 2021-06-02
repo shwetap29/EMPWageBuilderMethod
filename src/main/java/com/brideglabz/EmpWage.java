@@ -1,7 +1,7 @@
 package com.brideglabz;
 
-     interface IComputeEmpWage {
-        public void addCompanyEmpWage(String company, int empRatePerHour, int NumOfWorkingDays, int maxHoursPerMOnth);
+        interface IComputeEmpWage {
+        public void addCompanyEmpWage(String company, int empRatePerHour, int NumOfWorkingDays, int maxHoursPerMonth);
         public void computeEmpWage();
         public int getTotalWage(String company);
     }
@@ -28,7 +28,12 @@ package com.brideglabz;
             return "Total Emp Wage for company: "+company+" is: "+totalEmpWage;
         }
         public void main(String[] args) {
-            IComputeEmpWage empWageBuilder = new IComputeEmpWage();
+            IComputeEmpWage empWageBuilder = new EmpWageBuilder() {
+                @Override
+                public void computeEmpWage() {
+
+                }
+            };
             empWageBuilder.addCompanyEmpWage("Dmart", 20, 2, 10);
             empWageBuilder.addCompanyEmpWage("Reliance", 10, 4, 20);
             empWageBuilder.computeEmpWage();
